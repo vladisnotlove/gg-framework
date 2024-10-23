@@ -1,0 +1,48 @@
+.gg-game-loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+
+  background-image: url(./assets/main-background.png);
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: min(360px, 100%);
+}
+
+.gg-game-loader__logo {
+  width: 270px;
+}
+
+.gg-game-loader__text {
+  width: 240px;
+  font: var(--gg-lk-font-body2);
+  color: var(--gg-color-text-tertiary);
+  text-align: center;
+}
+
+.gg-game-loader__progress {
+  position: relative;
+  width: 270px;
+  height: 0.75rem;
+  border-radius: 0.75rem;
+  background: var(--gg-color-surface);
+  overflow: hidden;
+}
+
+.gg-game-loader__progress-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  border-radius: 0.75rem;
+  background: var(--gg-color-text-blue);
+  transition: width linear 0.5s;
+}

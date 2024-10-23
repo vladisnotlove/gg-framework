@@ -1,0 +1,33 @@
+{
+  "name": "gg-framework",
+  "version": "0.0.0",
+  "description": "Gambler game framework",
+  "exports": {
+    "types": "./dist/*.d.ts",
+    "import": "./dist/*.js"
+  },
+  "scripts": {
+    "watch": "rollup -c rollup.config.mjs --watch",
+    "build": "rollup -c rollup.config.mjs"
+  },
+  "author": "Vladislav Nikolaev",
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@types/node": "^22.7.9",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "concurrently": "^9.0.1",
+    "http-server": "^14.1.1",
+    "prettier": "3.3.3",
+    "rollup": "^4.22.4",
+    "tslib": "^2.7.0",
+    "typescript": "^5.6.2"
+  },
+  "dependencies": {
+    "classnames": "^2.5.1",
+    "effector": "^23.2.3",
+    "effector-react": "^23.2.1",
+    "react": "^18.3.1",
+    "use-interval": "^1.4.0"
+  }
+}

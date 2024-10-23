@@ -1,0 +1,36 @@
+.gg-game-error__window {
+  position: relative;
+  width: 312px;
+  height: 366px;
+  border-radius: 1rem;
+  overflow: hidden;
+  background: var(--gg-color-background-primary);
+}
+
+.gg-game-error__background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  object-fit: cover;
+}
+
+.gg-game-error__text {
+  position: relative;
+  width: calc(100% - 2rem);
+  padding: 1rem;
+  font: var(--gg-lk-font-h4);
+  z-index: 2;
+  text-align: center;
+}
+
+.gg-game-error__img {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  width: 195px;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+}

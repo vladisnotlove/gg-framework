@@ -1,0 +1,101 @@
+@font-face {
+  font-family: "Dela Gothic One";
+  src: url("./assets/DelaGothicOne-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geologica";
+  src: url("./assets/Geologica-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+html {
+  --gg-color-surface: #252121;
+  --gg-color-background-primary: #1a202b;
+  --gg-color-background-secondary: #2a3449;
+  --gg-color-background-tertiary: #42516d;
+  --gg-color-background-dark-blue: linear-gradient(
+    166.33deg,
+    #0f1928 9.83%,
+    #223756 76.18%
+  );
+  --gg-color-text-primary: #fffffff5;
+  --gg-color-text-secondary: #b1afaf;
+  --gg-color-text-tertiary: #828181;
+  --gg-color-text-blue: #4299fd;
+
+  --gg-font-button: 1rem / 1.5 "Dela Gothic One"; /* old */
+  --gg-font-h4: 1.75rem / 2.25rem "Dela Gothic One"; /* old */
+  --gg-font-h3: 2.25rem / 2.75rem "Dela Gothic One"; /* old */
+  --gg-font-h2: 2.5rem / 3.375rem "Dela Gothic One"; /* old */
+
+  --gg-lk-font-caption: 0.75rem / 1rem "Geologica"; /* old */
+  --gg-lk-font-button-small: 0.875rem / 1.25rem "Dela Gothic One"; /* old */
+  --gg-lk-font-h4: 1.25rem / 1.75rem "Dela Gothic One"; /* old */
+  --gg-lk-font-body: 1rem / 1.5rem "Geologica"; /* old */
+  --gg-lk-font-body2: 0.875rem / 1.25rem "Geologica"; /* old */
+
+  width: 100%;
+  height: 100%;
+  color: var(--gg-color-text-primary);
+  scroll-snap-type: both mandatory;
+}
+
+body {
+  margin: 0;
+  border: none;
+  padding: 0;
+
+  width: 100%;
+  height: 100%;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+/* game */
+
+.gg-game {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  user-select: none;
+  background: var(--gg-color-background-primary);
+  transition: opacity 0.4s;
+}
+
+.gg-game:not(.ready) > .gg-game__screen {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.gg-game.transparent {
+  background: transparent;
+}
+
+.gg-game__screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+
+  opacity: 0;
+  transform: translateY(200%);
+  transition: opacity 0.8s, transform 0s 0.8s;
+}
+
+.gg-game__screen.active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.8s, transform 0s;
+}

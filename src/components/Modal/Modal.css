@@ -1,0 +1,23 @@
+.gg-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+  background: #0e0c0c8f;
+
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 0.8s, transform 0s 0.8s;
+}
+
+.gg-modal.open {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.8s, transform 0s;
+}

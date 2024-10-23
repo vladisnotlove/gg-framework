@@ -1,0 +1,46 @@
+.gg-button {
+  padding: 0.5rem;
+  border-radius: 1rem;
+  border: none;
+
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+
+  font: var(--gg-font-button);
+  background: linear-gradient(90.73deg, #1a7aea 0.29%, #7bc3f7 100%);
+  color: var(--gg-color-text-primary);
+  text-align: center;
+
+  cursor: pointer;
+
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
+
+  transition: background 0.2s;
+}
+
+.gg-button.neutral {
+  background: rgba(255, 255, 255, 0.08);
+}
+.gg-button.neutral:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.gg-button.success {
+  background: #2e906db2;
+}
+
+.gg-button.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.gg-button.full-width {
+  width: 100%;
+}

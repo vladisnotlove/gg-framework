@@ -1,0 +1,21 @@
+.gg-chips {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font: var(--gg-font-button);
+}
+
+.gg-chips.big {
+  gap: 0.5rem;
+  font: var(--gg-font-h4);
+}
+
+.gg-chips.big > .gg-chips__icon {
+  width: 2rem;
+  height: 2rem;
+}
+
+.gg-chips__icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
