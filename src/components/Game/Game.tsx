@@ -1,8 +1,9 @@
 import classNames from "classnames";
-import React from "react";
+import React, { useEffect } from "react";
 import useInterval from "use-interval";
 import { useAuth, useTranslation } from "src/utils";
-import { AuthStore, TranslationStore } from "src/stores";
+import { loadAsset } from "src/utils/asset";
+import { AuthStore, TranslationStore, LoaderStore } from "src/stores";
 import "./Game.css";
 
 type GameProps = React.PropsWithChildren<{
@@ -53,6 +54,35 @@ export const Game: React.FC<GameProps> = ({
 		},
 		authReady ? null : 500,
 	);
+
+	useEffect(() => {
+		Promise.allSettled([
+			loadAsset({
+				type: "image",
+				url: "img/main-background.png",
+			}),
+			loadAsset({
+				type: "image",
+				url: "img/logo.png",
+			}),
+			loadAsset({
+				type: "font",
+				url: "font/DelaGothicOne-Regular.ttf",
+				family: "Dela Gothic One",
+				style: "normal",
+				weight: "normal",
+			}),
+			loadAsset({
+				type: "font",
+				url: "font/Geologica-Regular.ttf",
+				family: "Geologica",
+				style: "normal",
+				weight: "normal",
+			}),
+		]).then(() => {
+			LoaderStore.setReady();
+		});
+	}, []);
 
 	return (
 		<div
