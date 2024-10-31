@@ -69,17 +69,8 @@ const options = {
 				cssUrl([
 					{
 						url: (asset) => {
-							const hash = crypto
-								.createHash("sha1")
-								.update(fs.readFileSync(asset.absolutePath))
-								.digest("hex")
-								.substr(0, 16);
 							const file = fs.readFileSync(asset.absolutePath);
-							const fileName =
-								path.parse(asset.url).name +
-								"." +
-								hash +
-								path.parse(asset.url).ext;
+							const fileName = path.basename(asset.url);
 
 							fs.ensureDirSync(path.join(buildDir, "assets"));
 							fs.writeFileSync(
@@ -89,7 +80,6 @@ const options = {
 
 							return slash(path.join("assets", fileName));
 						},
-						useHash: true,
 					},
 				]),
 			],
