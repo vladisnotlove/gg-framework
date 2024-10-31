@@ -4,8 +4,8 @@ declare global {
 	namespace NodeJS {
 		interface ProcessEnv {
 			API_URL: string;
-			DEFAULT_TRANSLATIONS: string;
-			DEFAULT_TOKEN?: string;
+			TRANSLATIONS?: string;
+			TOKEN?: string;
 		}
 	}
 }

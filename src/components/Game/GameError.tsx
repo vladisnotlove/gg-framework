@@ -2,10 +2,10 @@ import classNames from "classnames";
 import React from "react";
 import { Modal } from "../Modal";
 import { GameScreen } from "./GameScreen";
-import "./GameError.css";
-import closeTabsImg from "./assets/close-tabs.png";
-import refreshImg from "./assets/refresh.png";
 import { useTranslation } from "src/utils";
+import closeTabsImg from "../../assets/close-tabs.png";
+import refreshImg from "../../assets/refresh.png";
+import "./GameError.css";
 
 type GameErrorProps = {
 	className?: string;

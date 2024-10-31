@@ -2,7 +2,7 @@ import React from "react";
 import classNames from "classnames";
 import { useTranslation } from "src/utils";
 import { GameScreen } from "./GameScreen";
-import logoImg from "./assets/logo.png";
+import logoImg from "../../assets/logo.png";
 import "./GameLoader.css";
 
 type GameLoaderProps = {

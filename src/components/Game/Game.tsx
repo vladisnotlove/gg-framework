@@ -4,6 +4,12 @@ import useInterval from "use-interval";
 import { useAuth, useTranslation } from "src/utils";
 import { loadAsset } from "src/utils/asset";
 import { AuthStore, TranslationStore, LoaderStore } from "src/stores";
+
+import font1 from "../../assets/DelaGothicOne-Regular.ttf";
+import font2 from "../../assets/Geologica-Regular.ttf";
+import img1 from "../../assets/logo.png";
+import img2 from "../../assets/main-background.png";
+
 import "./Game.css";
 
 type GameProps = React.PropsWithChildren<{
@@ -12,7 +18,7 @@ type GameProps = React.PropsWithChildren<{
 }>;
 
 const getTranslations = (() => {
-	const defaultTranslations = JSON.parse(process.env.DEFAULT_TRANSLATIONS); // to avoid object reference changing
+	const defaultTranslations = JSON.parse(process.env.TRANSLATIONS || "{}"); // to avoid object reference changing
 	return () => {
 		return window.translations || defaultTranslations;
 	};
@@ -20,10 +26,7 @@ const getTranslations = (() => {
 
 const getToken = () => {
 	return (
-		window.parent.window.token ||
-		window.token ||
-		process.env.DEFAULT_TOKEN ||
-		null
+		window.parent.window.token || window.token || process.env.TOKEN || null
 	);
 };
 
@@ -58,26 +61,26 @@ export const Game: React.FC<GameProps> = ({
 	useEffect(() => {
 		Promise.allSettled([
 			loadAsset({
-				type: "image",
-				url: "img/main-background.png",
-			}),
-			loadAsset({
-				type: "image",
-				url: "img/logo.png",
-			}),
-			loadAsset({
 				type: "font",
-				url: "font/DelaGothicOne-Regular.ttf",
+				url: font1,
 				family: "Dela Gothic One",
 				style: "normal",
 				weight: "normal",
 			}),
 			loadAsset({
 				type: "font",
-				url: "font/Geologica-Regular.ttf",
+				url: font2,
 				family: "Geologica",
 				style: "normal",
 				weight: "normal",
+			}),
+			loadAsset({
+				type: "image",
+				url: img1,
+			}),
+			loadAsset({
+				type: "image",
+				url: img2,
 			}),
 		]).then(() => {
 			LoaderStore.setReady();
