@@ -41,7 +41,7 @@ const options = {
 			],
 			limit: 0,
 			destDir: path.join(buildDir, "assets"),
-			publicPath: "assets",
+			publicPath: "assets/",
 			fileName: "[name].[hash][extname]",
 		}),
 		nodeResolve({
