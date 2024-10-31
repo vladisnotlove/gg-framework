@@ -24,7 +24,7 @@ const options = {
 	},
 	plugins: [
 		del({
-			targets: [path.join(buildDir)],
+			targets: buildDir,
 			runOnce: true,
 		}),
 		peerDepsExternal(),
@@ -69,17 +69,28 @@ const options = {
 				cssUrl([
 					{
 						url: (asset) => {
-							const file = fs.readFileSync(asset.absolutePath);
-							const fileName = path.basename(asset.url);
+							// copy asset to dist/assets
+							const hash = crypto
+								.createHash("sha1")
+								.update(fs.readFileSync(asset.absolutePath))
+								.digest("hex")
+								.substr(0, 16);
+							const contents = fs.readFileSync(asset.absolutePath);
+							const fileName =
+								path.parse(asset.url).name +
+								"." +
+								hash +
+								path.parse(asset.url).ext;
 
-							fs.ensureDirSync(path.join(buildDir, "assets"));
-							fs.writeFileSync(
-								path.join(buildDir, "assets", fileName),
-								file,
-							);
+							const dir = path.join(buildDir, "assets");
+							const filePath = path.join(dir, fileName);
+
+							fs.ensureDirSync(dir);
+							fs.writeFileSync(filePath, contents);
 
 							return slash(path.join("assets", fileName));
 						},
+						useHash: true,
 					},
 				]),
 			],
