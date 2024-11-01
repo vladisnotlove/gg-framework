@@ -1,7 +1,5 @@
 # gg-framework
 
----
-
 Бибилиотека для создания gembler игр на react. Содержит компоненты и утилиты.
 
 Внутри используются переменные `process.env`
@@ -34,8 +32,6 @@ npm i gg-framework react react-dom
 ```
 
 ## Компоненты
-
----
 
 ### Game
 
@@ -318,8 +314,6 @@ export const loadData = ({
 
 ## Переменные окружения
 
----
-
-- `API_URL` - url для api бэкенда. Используется в `request`. Example: `https://api-test.ludomancoin.com`
-- `TOKEN` - захаркоженный токен, используемый, если нет в window. Не использовать в prod-е. Используется в `useAuth`
-- `TRANSLATIONS` - захаркоженный JSON переводы в виде строки, используемый, если нет в window. Не использовать в prod-е. Используется в `useTranslation`
+- `API_URL` - url для api бэкенда. Используется в `request`. Пример: `https://api-test.ludomancoin.com`
+- `TOKEN` - захардкоженный токен, используемый, если нет в window. Используется в `useAuth`. ВАЖНО: не использовать в prod-е
+- `TRANSLATIONS` - захардкоженный JSON переводы в виде строки, используемый, если нет в window. Используется в `useTranslation`. ВАЖНО: не использовать в prod-е
