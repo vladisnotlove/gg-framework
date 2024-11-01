@@ -41,7 +41,7 @@ export const GameError: React.FC<GameErrorProps> = ({
 							alt=""
 						/>
 						<div className="gg-game-error__text">
-							{translate("Close other game tabs..")}
+							{translate("Close other game tabs...")}
 						</div>
 					</div>
 				)}
