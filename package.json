@@ -7,11 +7,14 @@
 	"files": [
 		"dist",
 		"package.json",
-		"README.md",
-		"docs"
+		"README.md"
 	],
 	"scripts": {
 		"build": "rollup -c rollup.config.mjs"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/vladisnotlove/gg-framework.git"
 	},
 	"author": "Vladislav Nikolaev",
 	"devDependencies": {

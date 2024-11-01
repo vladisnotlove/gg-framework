@@ -4,17 +4,24 @@
 
 Бибилиотека для создания gembler игр на react. Содержит компоненты и утилиты.
 
-Внутри использует переменные `process.env`
+Внутри используются переменные `process.env`
 
-Компоненты:
-
--  [Game](#game)
--  [GameLoader](#gameloader)
--  [GameMain](#gamemain)
--  [GameError](#gameerror)
-
-Утилиты:
-
+- [Компоненты](#компоненты):
+    - [Game](#game)
+    - [GameLoader](#gameloader)
+    - [GameMain](#gamemain)
+    - [GameError](#gameerror)
+    - [Button](#button)
+    - [Modal](#modal)
+    - [Chips](#chips)
+    - [Result](#result)
+    - [Bet](#bet)
+- [Утилиты](#утилиты):
+    - [useAuth](#useauth)
+    - [useTranslation](#usetranslation)
+    - [useLoader](#useloader)
+    - [request](#request)
+- [Переменные окружения](#переменные-окружения)
 
 ## Установка
 
@@ -66,7 +73,7 @@ type GameProps = React.PropsWithChildren<{
 
 Компонента для отображения загрузки
 
-![screenshot](./docs/game-loader.png)
+![screenshot](https://vladisnotlove.github.io/gg-framework/docs/game-loader.png)
 
 ```ts
 type GameLoaderProps = {
@@ -91,7 +98,7 @@ type GameMainProps = React.PropsWithChildren<{
 
 Компонента для отображения ошибок в игре
 
-![screenshot](./docs/game-error-1.png) ![screenshot](./docs/game-error-2.png)
+![screenshot](https://vladisnotlove.github.io/gg-framework/docs/game-error-1.png) ![screenshot](https://vladisnotlove.github.io/gg-framework/docs/game-error-2.png)
 
 ```ts
 type GameErrorProps = {
@@ -108,7 +115,7 @@ type GameErrorProps = {
 
 ### Button
 
-![screenshot](./docs/button.png)
+![screenshot](https://vladisnotlove.github.io/gg-framework/docs/button.png)
 
 ```ts
 export type ButtonProps = React.PropsWithChildren<{
@@ -123,7 +130,7 @@ export type ButtonProps = React.PropsWithChildren<{
 
 Компонента для отображения модального окна без самого окна. С анимацией открытия и закрытия.
 
-![screenshot](./docs/modal.png)
+![screenshot](https://vladisnotlove.github.io/gg-framework/docs/modal.png)
 
 ```ts
 type ModalProps = React.PropsWithChildren<{
@@ -136,7 +143,7 @@ type ModalProps = React.PropsWithChildren<{
 
 Отображение количетсво gchip-ов
 
-![screenshot](./docs/chips.png)
+![screenshot](https://vladisnotlove.github.io/gg-framework/docs/chips.png)
 
 ```ts
 type ChipsProps = {
@@ -145,11 +152,12 @@ type ChipsProps = {
     size?: "medium" | "big";
 };
 ```
+
 ### Result
 
 Результат выигрыша в игре
 
-![screenshot](./docs/result.png)
+![screenshot](https://vladisnotlove.github.io/gg-framework/docs/result.png)
 
 ```ts
 type ResultProps = {
@@ -170,7 +178,7 @@ type ResultProps = {
 
 Компонента для ввода ставки
 
-![screenshot](./docs/bet.png)
+![screenshot](https://vladisnotlove.github.io/gg-framework/docs/bet.png)
 
 ```ts
 type BetProps = {
@@ -307,3 +315,11 @@ export const loadData = ({
     );
 };
 ```
+
+## Переменные окружения
+
+---
+
+- `API_URL` - url для api бэкенда. Используется в `request`. Example: `https://api-test.ludomancoin.com`
+- `TOKEN` - захаркоженный токен, используемый, если нет в window. Не использовать в prod-е. Используется в `useAuth`
+- `TRANSLATIONS` - захаркоженный JSON переводы в виде строки, используемый, если нет в window. Не использовать в prod-е. Используется в `useTranslation`
