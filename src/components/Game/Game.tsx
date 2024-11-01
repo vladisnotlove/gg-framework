@@ -10,6 +10,11 @@ import font2 from "../../assets/Geologica-Regular.ttf";
 import img1 from "../../assets/logo.png";
 import img2 from "../../assets/main-background.png";
 
+import img3 from "../../assets/close-tabs.png";
+import img4 from "../../assets/big-coin.png";
+import img5 from "../../assets/coin.png";
+import img6 from "../../assets/refresh.png";
+
 import "./Game.css";
 
 type GameProps = React.PropsWithChildren<{
@@ -84,6 +89,22 @@ export const Game: React.FC<GameProps> = ({
 			}),
 		]).then(() => {
 			LoaderStore.setReady();
+			LoaderStore.loadAsset({
+				type: "image",
+				url: img3,
+			});
+			LoaderStore.loadAsset({
+				type: "image",
+				url: img4,
+			});
+			LoaderStore.loadAsset({
+				type: "image",
+				url: img5,
+			});
+			LoaderStore.loadAsset({
+				type: "image",
+				url: img6,
+			});
 		});
 	}, []);
 
