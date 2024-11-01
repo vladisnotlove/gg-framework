@@ -13,8 +13,9 @@ type ResultProps = {
 	title?: string;
 	count?: number;
 	coefficient?: string;
+	highScore?: boolean;
 	buttonText?: string;
-	buttonProps: ButtonProps;
+	buttonProps?: ButtonProps;
 	backgroundImgSrc: string;
 };
 
@@ -25,6 +26,7 @@ export const Result: React.FC<ResultProps> = ({
 	title,
 	count,
 	coefficient,
+	highScore,
 	buttonText,
 	buttonProps,
 	backgroundImgSrc,
@@ -64,11 +66,16 @@ export const Result: React.FC<ResultProps> = ({
 					{coefficient && (
 						<div className="gg-result__coefficient">{coefficient}</div>
 					)}
+					{highScore && (
+						<div className="gg-result__high-score">
+							{translate("New high score")}
+						</div>
+					)}
 				</div>
 				<Button
 					className={classNames(
 						"gg-result__button",
-						buttonProps.className,
+						buttonProps?.className,
 					)}
 					onClick={() => {
 						if (buttonProps?.onClick) buttonProps.onClick();
