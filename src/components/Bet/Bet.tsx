@@ -16,6 +16,7 @@ type BetProps = {
 	max: number;
 	value: number;
 	onChange: (value: number) => void;
+	disabled: boolean;
 };
 
 export const Bet: React.FC<BetProps> = ({
@@ -24,6 +25,7 @@ export const Bet: React.FC<BetProps> = ({
 	max,
 	value,
 	onChange: _onChange,
+	disabled,
 }) => {
 	const { translate } = useTranslation();
 
@@ -89,7 +91,13 @@ export const Bet: React.FC<BetProps> = ({
 	}, [value]);
 
 	return (
-		<div className={classNames("gg-bet", { fixed }, className)}>
+		<div
+			className={classNames(
+				"gg-bet",
+				{ "gg-bet_fixed": fixed, "gg-bet_disabled": disabled },
+				className,
+			)}
+		>
 			<button
 				className="gg-bet__min"
 				onClick={() => {
