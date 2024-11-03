@@ -1,21 +1,31 @@
 .gg-chips {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-  font: var(--gg-font-button);
+	display: flex;
+	align-items: center;
+	gap: 0.25rem;
+	font: var(--gg-font-button);
 }
 
-.gg-chips.big {
-  gap: 0.5rem;
-  font: var(--gg-font-h4);
+.gg-chips.gg-chips_big {
+	gap: 0.5rem;
+	font: var(--gg-font-h4);
 }
 
-.gg-chips.big > .gg-chips__icon {
-  width: 2rem;
-  height: 2rem;
+.gg-chips.gg-chips_big > .gg-chips__icon {
+	width: 2rem;
+	height: 2rem;
+}
+
+.gg-chips.gg-chips_small {
+	gap: 0.5rem;
+	font: var(--gg-lk-font-button-small);
+}
+
+.gg-chips.gg-chips_small > .gg-chips__icon {
+	width: 2rem;
+	height: 2rem;
 }
 
 .gg-chips__icon {
-  width: 1.5rem;
-  height: 1.5rem;
+	width: 1.5rem;
+	height: 1.5rem;
 }
