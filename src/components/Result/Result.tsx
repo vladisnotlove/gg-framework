@@ -33,7 +33,11 @@ export const Result: React.FC<ResultProps> = ({
 }) => {
 	const { translate } = useTranslation();
 	return (
-		<Modal className={classNames("gg-result", className)} open={open}>
+		<Modal
+			className={classNames("gg-result", className)}
+			open={open}
+			disablePortal
+		>
 			<div className="gg-result__window">
 				<img className="gg-result__background" src={backgroundImgSrc} />
 				<div

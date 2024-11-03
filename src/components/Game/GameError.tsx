@@ -32,7 +32,7 @@ export const GameError: React.FC<GameErrorProps> = ({
 			className={classNames("gg-game-error", className)}
 			active={active}
 		>
-			<Modal open>
+			<Modal open disablePortal>
 				{error?.type === "session" && (
 					<div className="gg-game-error__window">
 						<img
