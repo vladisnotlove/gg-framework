@@ -77,12 +77,12 @@ body {
 	transition: opacity 0.4s;
 }
 
-.gg-game:not(.ready) > .gg-game__screen {
+.gg-game:not(.gg-game_ready) > .gg-game__screen {
 	opacity: 0;
 	pointer-events: none;
 }
 
-.gg-game.transparent {
+.gg-game.gg-game_transparent {
 	background: transparent;
 }
 
@@ -101,7 +101,7 @@ body {
 		transform 0s 0.8s;
 }
 
-.gg-game__screen.active {
+.gg-game__screen.gg-game_active {
 	opacity: 1;
 	transform: translateY(0);
 	transition:

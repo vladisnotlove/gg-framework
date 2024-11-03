@@ -112,7 +112,10 @@ export const Game: React.FC<GameProps> = ({
 		<div
 			className={classNames(
 				"gg-game",
-				{ transparent, ready: translationReady },
+				{
+					"gg-game_transparent": transparent,
+					"gg-game_ready": translationReady && authReady,
+				},
 				className,
 			)}
 		>
