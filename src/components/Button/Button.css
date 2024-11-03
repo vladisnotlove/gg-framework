@@ -25,22 +25,22 @@
 	transition: background 0.2s;
 }
 
-.gg-button.neutral {
+.gg-button.gg-button_neutral {
 	background: rgba(255, 255, 255, 0.08);
 }
-.gg-button.neutral:hover {
+.gg-button.gg-button_neutral:hover {
 	background: rgba(255, 255, 255, 0.12);
 }
 
-.gg-button.success {
+.gg-button.gg-button_success {
 	background: #2e906db2;
 }
 
-.gg-button.disabled {
+.gg-button.gg-button_disabled {
 	opacity: 0.5;
 	pointer-events: none;
 }
 
-.gg-button.full-width {
+.gg-button.gg-button_full-width {
 	width: 100%;
 }
