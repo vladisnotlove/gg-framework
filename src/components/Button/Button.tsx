@@ -6,17 +6,19 @@ export type ButtonProps = React.PropsWithChildren<{
 	className?: string;
 	onClick?: () => void;
 	color?: "primary" | "success" | "neutral";
+	size?: "medium" | "small";
 	disabled?: boolean;
 	fullWidth?: boolean;
 }>;
 
 export const Button: React.FC<ButtonProps> = ({
 	className,
-	onClick,
-	disabled,
-	color = "primary",
-	fullWidth,
 	children,
+	onClick,
+	color = "primary",
+	size = "medium",
+	fullWidth,
+	disabled,
 }) => {
 	return (
 		<button
@@ -24,6 +26,7 @@ export const Button: React.FC<ButtonProps> = ({
 				"gg-button",
 				{
 					[`gg-button_${color}`]: true,
+					[`gg-button_${size}`]: true,
 					"gg-button_full-width": fullWidth,
 					"gg-button_disabled": disabled,
 				},

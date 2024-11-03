@@ -1,5 +1,5 @@
 .gg-button {
-	padding: 0.5rem;
+	padding: 0.75rem;
 	border-radius: 1rem;
 	border: none;
 
@@ -24,6 +24,16 @@
 
 	transition: background 0.2s;
 }
+
+/* size */
+
+.gg-button.gg-button_small {
+	padding: 0.5rem;
+	gap: 0.25rem;
+	font: var(--gg-lk-font-button-small);
+}
+
+/* color */
 
 .gg-button.gg-button_neutral {
 	background: rgba(255, 255, 255, 0.08);
