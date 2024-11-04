@@ -4,6 +4,7 @@
 
 Внутри используются переменные `process.env`
 
+- [CCS переменные](#переменные-окружения)
 - [Компоненты](#компоненты):
     - [Game](#game)
     - [GameLoader](#gameloader)
@@ -11,6 +12,7 @@
     - [GameError](#gameerror)
     - [Button](#button)
     - [Modal](#modal)
+    - [Spinner](#spinner)
     - [Chips](#chips)
     - [Result](#result)
     - [Bet](#bet)
@@ -29,6 +31,46 @@
 
 ```
 npm i gg-framework react react-dom
+```
+
+## CSS переменные
+
+```css
+html {
+    --gg-color-surface: #252121;
+    --gg-color-background-primary: #1a202b;
+    --gg-color-background-secondary: #2a3449;
+    --gg-color-background-tertiary: #42516d;
+    --gg-color-background-dark-blue: linear-gradient(
+        166.33deg,
+        #0f1928 9.83%,
+        #223756 76.18%
+    );
+    --gg-color-text-primary: #fffffff5;
+    --gg-color-text-secondary: #b1afaf;
+    --gg-color-text-tertiary: #828181;
+    --gg-color-text-blue: #4299fd;
+    --gg-color-button-blue-primary: linear-gradient(
+        90.73deg,
+        #1a7aea 0.29%,
+        #7bc3f7 100%
+    );
+    --gg-color-success: #246950;
+
+    --gg-font-button: 1rem / 1.5 "Dela Gothic One"; /* old */
+    --gg-font-h4: 1.75rem / 2.25rem "Dela Gothic One"; /* old */
+    --gg-font-h3: 2.25rem / 2.75rem "Dela Gothic One"; /* old */
+    --gg-font-h2: 2.5rem / 3.375rem "Dela Gothic One"; /* old */
+
+    --gg-lk-font-caption: 0.75rem / 1rem "Geologica"; /* old */
+    --gg-lk-font-button-small: 0.875rem / 1.25rem "Dela Gothic One"; /* old */
+    --gg-lk-font-h4: 1.25rem / 1.75rem "Dela Gothic One"; /* old */
+    --gg-lk-font-body: 1rem / 1.5rem "Geologica"; /* old */
+    --gg-lk-font-body2: 0.875rem / 1.25rem "Geologica"; /* old */
+
+    --gg-zindex-modal: 1000;
+    --gg-zindex-game-main-loader: 1200;
+}
 ```
 
 ## Компоненты
@@ -81,12 +123,16 @@ type GameLoaderProps = {
 
 ### GameMain
 
-Компонента для отображения основного экрана в игре. 
+Компонента для отображения основного экрана в игре. С возможностью показывать индикацию отправки запроса на сервер.
+
+![screenshot](https://vladisnotlove.github.io/gg-framework/docs/game-main-1.png) ![screenshot](https://vladisnotlove.github.io/gg-framework/docs/game-main-2.png)
 
 ```ts
 type GameMainProps = React.PropsWithChildren<{
-    className?: string;
-    active?: boolean;
+	className?: string;
+	active?: boolean;
+	loading?: boolean;
+	loadingText?: string;
 }>
 ```
 
@@ -124,14 +170,28 @@ export type ButtonProps = React.PropsWithChildren<{
 
 ### Modal
 
-Компонента для отображения модального окна без самого окна. С анимацией открытия и закрытия.
+Компонента для отображения модального окна без самого окна. С анимацией открытия и закрытия. По умолчанию, html редерится в body с помощью portal.
 
 ![screenshot](https://vladisnotlove.github.io/gg-framework/docs/modal.png)
 
 ```ts
 type ModalProps = React.PropsWithChildren<{
-  className?: string;
-  open?: boolean;
+    className?: string;
+    open?: boolean;
+    disablePortal?: boolean;
+}>;
+```
+
+### Spinner
+
+Индикатор загрузки в виде спинера
+
+![screenshot](https://vladisnotlove.github.io/gg-framework/docs/spinner.png)
+
+```ts
+type ModalProps = React.PropsWithChildren<{
+    className?: string;
+    size?: number;
 }>;
 ```
 
@@ -143,9 +203,9 @@ type ModalProps = React.PropsWithChildren<{
 
 ```ts
 type ChipsProps = {
-    className?: string;
-    value?: number;
-    size?: "medium" | "big";
+	className?: string;
+	value?: number;
+	size?: "medium" | "big" | "small";
 };
 ```
 
@@ -183,6 +243,7 @@ type BetProps = {
     max: number;
     value: number;
     onChange: (value: number) => void;
+    disabled: boolean;
 };
 ```
 
