@@ -5,6 +5,13 @@
 	font: var(--gg-font-button);
 }
 
+.gg-chips__icon {
+	width: 1.5rem;
+	height: 1.5rem;
+}
+
+/* big */
+
 .gg-chips.gg-chips_big {
 	gap: 0.5rem;
 	font: var(--gg-font-h4);
@@ -15,17 +22,8 @@
 	height: 2rem;
 }
 
+/* small */
+
 .gg-chips.gg-chips_small {
-	gap: 0.5rem;
 	font: var(--gg-lk-font-button-small);
-}
-
-.gg-chips.gg-chips_small > .gg-chips__icon {
-	width: 2rem;
-	height: 2rem;
-}
-
-.gg-chips__icon {
-	width: 1.5rem;
-	height: 1.5rem;
 }
