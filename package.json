@@ -1,6 +1,6 @@
 {
 	"name": "gg-framework",
-	"version": "0.3.0",
+	"version": "0.3.1",
 	"description": "Gambler game framework",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
