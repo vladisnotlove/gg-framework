@@ -47,6 +47,7 @@ html {
 	--gg-lk-font-body2: 0.875rem / 1.25rem "Geologica"; /* old */
 
 	--gg-zindex-modal: 1000;
+	--gg-zindex-game-main-loader: 1200;
 
 	width: 100%;
 	height: 100%;
