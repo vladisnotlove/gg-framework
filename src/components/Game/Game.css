@@ -46,6 +46,8 @@ html {
 	--gg-lk-font-body: 1rem / 1.5rem "Geologica"; /* old */
 	--gg-lk-font-body2: 0.875rem / 1.25rem "Geologica"; /* old */
 
+	--gg-zindex-modal: 1000;
+
 	width: 100%;
 	height: 100%;
 	color: var(--gg-color-text-primary);

@@ -16,6 +16,8 @@
 	transition:
 		opacity 0.8s,
 		transform 0s 0.8s;
+
+	z-index: var(--gg-zindex-modal);
 }
 
 .gg-modal.gg-modal_open {
