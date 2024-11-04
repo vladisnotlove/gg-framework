@@ -163,6 +163,8 @@ type GameErrorProps = {
 export type ButtonProps = React.PropsWithChildren<{
     className?: string;
     onClick?: () => void;
+    color?: "primary" | "success" | "neutral";
+    size?: "medium" | "small";
     disabled?: boolean;
     fullWidth?: boolean;
 }>
