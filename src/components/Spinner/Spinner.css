@@ -1,0 +1,39 @@
+@keyframes gg-rotate {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.gg-spinner {
+	animation: gg-rotate 1.4s linear infinite;
+	font-size: 0;
+	fill: var(--gg-color-text-blue);
+	stroke: var(--gg-color-text-blue);
+	stroke-width: 2px;
+	width: 44px;
+	aspect-ratio: 1;
+}
+
+@keyframes gg-spinner-circle {
+	0% {
+		stroke-dasharray: 1px, 200px;
+		stroke-dashoffset: 0;
+	}
+
+	50% {
+		stroke-dasharray: 100px, 200px;
+		stroke-dashoffset: -15px;
+	}
+
+	100% {
+		stroke-dasharray: 100px, 200px;
+		stroke-dashoffset: -125px;
+	}
+}
+
+.gg-spinner__circle {
+	animation: gg-spinner-circle 1.4s ease-in-out infinite;
+}
