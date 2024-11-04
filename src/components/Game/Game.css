@@ -33,6 +33,7 @@ html {
 		#1a7aea 0.29%,
 		#7bc3f7 100%
 	);
+	--gg-color-success: #246950;
 
 	--gg-font-button: 1rem / 1.5 "Dela Gothic One"; /* old */
 	--gg-font-h4: 1.75rem / 2.25rem "Dela Gothic One"; /* old */

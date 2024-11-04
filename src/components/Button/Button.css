@@ -43,7 +43,7 @@
 }
 
 .gg-button.gg-button_success {
-	background: #2e906db2;
+	background: var(--gg-color-success);
 }
 
 .gg-button.gg-button_disabled {
