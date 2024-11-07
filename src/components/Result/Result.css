@@ -104,7 +104,7 @@
 }
 
 .gg-result__button {
-	width: calc(100% - 3rem);
+	width: 100%;
 	box-sizing: border-box;
 	text-transform: uppercase;
 	z-index: 1;
