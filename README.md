@@ -339,10 +339,12 @@ return <Game>
 ```ts
 export declare const request: {
     post: <TBody = unknown, TResponse = unknown>(
-        url: string, 
-        token: string, 
-        body?: TBody,
-	    minDelay?: number,
+        url: string,
+        token: string,
+        body: TBody,
+        options: {
+            minDelay?: number;
+        } = {},
     ) => Promise<TResponse>;
 };
 
