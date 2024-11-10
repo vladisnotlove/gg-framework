@@ -334,14 +334,15 @@ return <Game>
 
 ### request
 
-Простой API клиент, который внутри использует `API_URL`
+Простой API клиент, который внутри использует `API_URL`. `minDelay` - это минимальная задержка между запросами с одинаковыми URL-ами
 
 ```ts
 export declare const request: {
     post: <TBody = unknown, TResponse = unknown>(
         url: string, 
         token: string, 
-        body?: TBody
+        body?: TBody,
+	    minDelay?: number,
     ) => Promise<TResponse>;
 };
 
