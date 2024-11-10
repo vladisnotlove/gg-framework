@@ -19,14 +19,16 @@ const wait = (ms: number) => {
 const post = async <TBody = unknown, TResponse = unknown>(
 	url: string,
 	token: string,
-	body?: TBody,
-	minDelay?: number,
+	body: TBody,
+	options: {
+		minDelay?: number;
+	} = {},
 ) => {
-	if (minDelay) {
+	if (options.minDelay) {
 		const lastRequestStartTime = lastRequestStartTimeByUrl.get(url);
 		if (lastRequestStartTime) {
 			const delay = Date.now() - lastRequestStartTime;
-			await wait(Math.max(minDelay - delay, 0));
+			await wait(Math.max(options.minDelay - delay, 0));
 		}
 		lastRequestStartTimeByUrl.set(url, Date.now());
 	}
