@@ -1,9 +1,11 @@
 import classNames from "classnames";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Modal } from "../Modal";
 import { useTranslation } from "../../utils";
+import { adjustFont } from "../../utils/html";
 import { Button, ButtonProps } from "../Button";
 import "./Result.css";
+
 import coinImg from "../../assets/big-coin.png";
 
 type ResultProps = {
@@ -32,6 +34,16 @@ export const Result: React.FC<ResultProps> = ({
 	backgroundImgSrc,
 }) => {
 	const { translate } = useTranslation();
+	const prizeCountRef = useRef<HTMLDivElement | null>(null);
+	const prizeCountFontRef = useRef<number | null>(null);
+
+	useEffect(() => {
+		if (open && prizeCountRef.current) {
+			const fontSize = adjustFont(prizeCountRef.current);
+			prizeCountFontRef.current = fontSize;
+		}
+	}, [open]);
+
 	return (
 		<Modal
 			className={classNames("gg-result", className)}
@@ -65,7 +77,17 @@ export const Result: React.FC<ResultProps> = ({
 				<div className="gg-result__body">
 					<div className="gg-result__prize">
 						<img className="gg-result__prize-coin" src={coinImg} />
-						<div className="gg-result__prize-count">{count ?? 0}</div>
+						<div
+							ref={prizeCountRef}
+							className="gg-result__prize-count"
+							style={{
+								fontSize:
+									prizeCountFontRef.current ??
+									`${prizeCountFontRef.current}px`,
+							}}
+						>
+							{count ?? 0}
+						</div>
 					</div>
 					{coefficient && (
 						<div className="gg-result__coefficient">{coefficient}</div>
