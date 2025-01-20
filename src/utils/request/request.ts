@@ -1,5 +1,11 @@
 const lastRequestStartTimeByUrl = new Map<string, number>();
 
+const getBaseUrl = () => {
+	return window.appMode === "development"
+		? process.env.DEV_API_URL
+		: process.env.API_URL || "";
+};
+
 const wait = (ms: number) => {
 	return new Promise<void>((resolve) => {
 		setTimeout(() => {
@@ -9,8 +15,8 @@ const wait = (ms: number) => {
 };
 
 /**
- * POST запрос
- * @param url - полный URL
+ * POST запрос, внутри использует API_URL или DEV_API_URL
+ * @param url - URL без '/' в начале
  * @param token - токен
  * @param body - тело запроса
  * @param minDelay - минимальная задержка между запросами с одинаковыми URL-ами
@@ -33,7 +39,7 @@ const post = async <TBody = unknown, TResponse = unknown>(
 		lastRequestStartTimeByUrl.set(url, Date.now());
 	}
 
-	return fetch(url, {
+	return fetch(getBaseUrl() + "/" + url, {
 		headers: {
 			"Content-Type": "application/json",
 			Authorization: `Bearer ${token}`,
