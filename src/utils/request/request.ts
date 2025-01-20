@@ -9,8 +9,8 @@ const wait = (ms: number) => {
 };
 
 /**
- * POST запрос, внутри использует API_URL
- * @param url - URL без '/' в начале
+ * POST запрос
+ * @param url - полный URL
  * @param token - токен
  * @param body - тело запроса
  * @param minDelay - минимальная задержка между запросами с одинаковыми URL-ами
@@ -33,7 +33,7 @@ const post = async <TBody = unknown, TResponse = unknown>(
 		lastRequestStartTimeByUrl.set(url, Date.now());
 	}
 
-	return fetch(process.env.API_URL + "/" + url, {
+	return fetch(url, {
 		headers: {
 			"Content-Type": "application/json",
 			Authorization: `Bearer ${token}`,
