@@ -23,7 +23,9 @@ type GameProps = React.PropsWithChildren<{
 }>;
 
 const getTranslations = (() => {
-	const defaultTranslations = JSON.parse(process.env.TRANSLATIONS || "{}"); // to avoid object reference changing
+	const defaultTranslations = JSON.parse(
+		process.env.DEFAULT_TRANSLATIONS || "{}",
+	); // to avoid object reference changing
 	return () => {
 		return window.translations || defaultTranslations;
 	};
