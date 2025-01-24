@@ -1,7 +1,9 @@
+import { AppStore } from "src/stores";
+
 const lastRequestStartTimeByUrl = new Map<string, number>();
 
 const getBaseUrl = () => {
-	return (window.appMode || process.env.DEFAULT_APP_MODE) === "development"
+	return AppStore.$mode.getState() === "development"
 		? process.env.DEV_API_URL
 		: process.env.API_URL || "";
 };

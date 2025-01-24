@@ -1,9 +1,16 @@
 import classNames from "classnames";
 import React, { useEffect } from "react";
-import useInterval from "use-interval";
+import { useUnit } from "effector-react";
 import { useAuth, useTranslation } from "src/utils";
 import { loadAsset } from "src/utils/asset";
-import { AuthStore, TranslationStore, LoaderStore } from "src/stores";
+import {
+	AuthStore,
+	TranslationStore,
+	LoaderStore,
+	AppStore,
+	AdStore,
+} from "src/stores";
+import { useNiceInterval } from "src/utils/useNiceInterval";
 
 import font1 from "../../assets/DelaGothicOne-Regular.ttf";
 import font2 from "../../assets/Geologica-Regular.ttf";
@@ -37,6 +44,18 @@ const getToken = () => {
 	);
 };
 
+const getMode = () => {
+	return (
+		window.parent.window.appMode ||
+		window.appMode ||
+		process.env.DEFAULT_APP_MODE
+	);
+};
+
+const getBlockId = () => {
+	return window.parent.window.blockId || window.blockId;
+};
+
 export const Game: React.FC<GameProps> = ({
 	className,
 	transparent,
@@ -44,8 +63,9 @@ export const Game: React.FC<GameProps> = ({
 }) => {
 	const { ready: translationReady } = useTranslation();
 	const { ready: authReady } = useAuth();
+	const appReady = useUnit(AppStore.$ready);
 
-	useInterval(
+	useNiceInterval(
 		() => {
 			const translations = getTranslations();
 			if (translations) {
@@ -55,7 +75,7 @@ export const Game: React.FC<GameProps> = ({
 		translationReady ? null : 500,
 	);
 
-	useInterval(
+	useNiceInterval(
 		() => {
 			const token = getToken();
 			if (token) {
@@ -63,6 +83,34 @@ export const Game: React.FC<GameProps> = ({
 			}
 		},
 		authReady ? null : 500,
+	);
+
+	useNiceInterval(
+		({ round }) => {
+			if (round < 4) {
+				const mode = getMode();
+				if (mode) {
+					AppStore.setMode(mode);
+				}
+			} else {
+				AppStore.setMode("development");
+			}
+		},
+		appReady ? null : 500,
+	);
+
+	useNiceInterval(
+		({ round, stop }) => {
+			if (round < 2) {
+				const blockId = getBlockId();
+				if (blockId) {
+					AdStore.setBlockId(blockId);
+				}
+			} else {
+				stop();
+			}
+		},
+		appReady ? null : 500,
 	);
 
 	useEffect(() => {
