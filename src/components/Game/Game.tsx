@@ -1,15 +1,15 @@
 import classNames from "classnames";
 import React, { useEffect } from "react";
 import { useUnit } from "effector-react";
-import { useAuth, useTranslation } from "src/utils";
 import { loadAsset } from "src/utils/asset";
 import {
 	AuthStore,
 	TranslationStore,
 	LoaderStore,
-	AppStore,
+	AppDataStore,
 	AdStore,
 } from "src/stores";
+import { useAuth, useTranslation, useAppData, useAd } from "src/utils";
 import { useNiceInterval } from "src/utils/useNiceInterval";
 
 import font1 from "../../assets/DelaGothicOne-Regular.ttf";
@@ -23,11 +23,6 @@ import img5 from "../../assets/coin.png";
 import img6 from "../../assets/refresh.png";
 
 import "./Game.css";
-
-type GameProps = React.PropsWithChildren<{
-	className?: string;
-	transparent?: string;
-}>;
 
 const getTranslations = (() => {
 	const defaultTranslations = JSON.parse(
@@ -56,14 +51,27 @@ const getBlockId = () => {
 	return window.parent.window.blockId || window.blockId;
 };
 
+type GameProps = React.PropsWithChildren<{
+	className?: string;
+	transparent?: string;
+	withAd?: boolean;
+}>;
+
 export const Game: React.FC<GameProps> = ({
 	className,
 	transparent,
 	children,
+	withAd,
 }) => {
 	const { ready: translationReady } = useTranslation();
 	const { ready: authReady } = useAuth();
-	const appReady = useUnit(AppStore.$ready);
+	const { ready: appDataReady } = useAppData();
+	const { ready: adReady } = useAd();
+
+	const translations = useUnit(TranslationStore.$translations);
+	const token = useUnit(AuthStore.$token);
+	const mode = useUnit(AppDataStore.$mode);
+	const blockId = useUnit(AdStore.$blockId);
 
 	useNiceInterval(
 		() => {
@@ -72,7 +80,7 @@ export const Game: React.FC<GameProps> = ({
 				TranslationStore.setTranslations(translations);
 			}
 		},
-		translationReady ? null : 500,
+		translations ? null : 500,
 	);
 
 	useNiceInterval(
@@ -82,7 +90,7 @@ export const Game: React.FC<GameProps> = ({
 				AuthStore.setToken(token);
 			}
 		},
-		authReady ? null : 500,
+		token ? null : 500,
 	);
 
 	useNiceInterval(
@@ -90,18 +98,18 @@ export const Game: React.FC<GameProps> = ({
 			if (round < 4) {
 				const mode = getMode();
 				if (mode) {
-					AppStore.setMode(mode);
+					AppDataStore.setMode(mode);
 				}
 			} else {
-				AppStore.setMode("development");
+				AppDataStore.setMode("development");
 			}
 		},
-		appReady ? null : 500,
+		mode ? null : 500,
 	);
 
 	useNiceInterval(
 		({ round, stop }) => {
-			if (round < 2) {
+			if (round < 4) {
 				const blockId = getBlockId();
 				if (blockId) {
 					AdStore.setBlockId(blockId);
@@ -110,7 +118,7 @@ export const Game: React.FC<GameProps> = ({
 				stop();
 			}
 		},
-		appReady ? null : 500,
+		!withAd || (withAd && blockId) ? null : 500,
 	);
 
 	useEffect(() => {
@@ -164,7 +172,11 @@ export const Game: React.FC<GameProps> = ({
 				"gg-game",
 				{
 					"gg-game_transparent": transparent,
-					"gg-game_ready": translationReady && authReady,
+					"gg-game_ready":
+						translationReady &&
+						authReady &&
+						appDataReady &&
+						(!withAd || (withAd && adReady)),
 				},
 				className,
 			)}

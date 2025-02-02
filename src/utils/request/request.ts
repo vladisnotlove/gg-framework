@@ -1,11 +1,16 @@
-import { AppStore } from "src/stores";
+import { AppDataStore } from "src/stores";
 
 const lastRequestStartTimeByUrl = new Map<string, number>();
 
 const getBaseUrl = () => {
-	return AppStore.$mode.getState() === "development"
-		? process.env.DEV_API_URL
-		: process.env.API_URL || "";
+	const mode = AppDataStore.$mode.getState();
+	if (mode === null) {
+		throw new Error("Set 'window.appMode' before call 'request.post'");
+	} else if (mode === "development") {
+		return process.env.DEV_API_URL;
+	} else {
+		return process.env.API_URL;
+	}
 };
 
 const wait = (ms: number) => {
