@@ -1,6 +1,5 @@
 import classNames from "classnames";
 import React, { useEffect } from "react";
-import { useUnit } from "effector-react";
 import { loadAsset } from "src/utils/asset";
 import {
 	AuthStore,
@@ -9,7 +8,13 @@ import {
 	AppDataStore,
 	AdStore,
 } from "src/stores";
-import { useAuth, useTranslation, useAppData, useAd } from "src/utils";
+import {
+	useAuth,
+	useTranslation,
+	useAppData,
+	useAd,
+	useLoader,
+} from "src/utils";
 import { useNiceInterval } from "src/utils/useNiceInterval";
 
 import font1 from "../../assets/DelaGothicOne-Regular.ttf";
@@ -24,33 +29,6 @@ import img6 from "../../assets/refresh.png";
 
 import "./Game.css";
 
-const getTranslations = (() => {
-	const defaultTranslations = JSON.parse(
-		process.env.DEFAULT_TRANSLATIONS || "{}",
-	); // to avoid object reference changing
-	return () => {
-		return window.translations || defaultTranslations;
-	};
-})();
-
-const getToken = () => {
-	return (
-		window.parent.window.token || window.token || process.env.TOKEN || null
-	);
-};
-
-const getMode = () => {
-	return (
-		window.parent.window.appMode ||
-		window.appMode ||
-		process.env.DEFAULT_APP_MODE
-	);
-};
-
-const getBlockId = () => {
-	return window.parent.window.blockId || window.blockId;
-};
-
 type GameProps = React.PropsWithChildren<{
 	className?: string;
 	transparent?: string;
@@ -63,62 +41,52 @@ export const Game: React.FC<GameProps> = ({
 	children,
 	withAd,
 }) => {
+	const { ready: loaderReady } = useLoader();
 	const { ready: translationReady } = useTranslation();
 	const { ready: authReady } = useAuth();
 	const { ready: appDataReady } = useAppData();
 	const { ready: adReady } = useAd();
 
-	const translations = useUnit(TranslationStore.$translations);
-	const token = useUnit(AuthStore.$token);
-	const mode = useUnit(AppDataStore.$mode);
-	const blockId = useUnit(AdStore.$blockId);
+	const fullReady =
+		loaderReady &&
+		translationReady &&
+		authReady &&
+		appDataReady &&
+		(!withAd || (withAd && adReady));
+
+	useNiceInterval(({ stop }) => {
+		if (window.translations) {
+			TranslationStore.setTranslations(window.translations);
+			stop();
+		}
+	}, 250);
+
+	useNiceInterval(({ stop }) => {
+		if (window.token) {
+			AuthStore.setToken(window.token);
+			stop();
+		}
+	}, 250);
+
+	useNiceInterval(({ stop }) => {
+		if (window.appMode && window.safeTop && window.safeBottom) {
+			AppDataStore.setData({
+				mode: window.appMode,
+				safeBottom: window.safeTop,
+				safeTop: window.safeBottom,
+			});
+			stop();
+		}
+	}, 250);
 
 	useNiceInterval(
-		() => {
-			const translations = getTranslations();
-			if (translations) {
-				TranslationStore.setTranslations(translations);
-			}
-		},
-		translations ? null : 500,
-	);
-
-	useNiceInterval(
-		() => {
-			const token = getToken();
-			if (token) {
-				AuthStore.setToken(token);
-			}
-		},
-		token ? null : 500,
-	);
-
-	useNiceInterval(
-		({ round }) => {
-			if (round < 4) {
-				const mode = getMode();
-				if (mode) {
-					AppDataStore.setMode(mode);
-				}
-			} else {
-				AppDataStore.setMode("development");
-			}
-		},
-		mode ? null : 500,
-	);
-
-	useNiceInterval(
-		({ round, stop }) => {
-			if (round < 4) {
-				const blockId = getBlockId();
-				if (blockId) {
-					AdStore.setBlockId(blockId);
-				}
-			} else {
+		({ stop }) => {
+			if (window.blockId) {
+				AdStore.setBlockId(window.blockId);
 				stop();
 			}
 		},
-		!withAd || (withAd && blockId) ? null : 500,
+		withAd ? 250 : null,
 	);
 
 	useEffect(() => {
@@ -147,6 +115,11 @@ export const Game: React.FC<GameProps> = ({
 			}),
 		]).then(() => {
 			LoaderStore.setReady();
+		});
+	}, []);
+
+	useEffect(() => {
+		if (fullReady) {
 			LoaderStore.loadAsset({
 				type: "image",
 				url: img3,
@@ -163,8 +136,8 @@ export const Game: React.FC<GameProps> = ({
 				type: "image",
 				url: img6,
 			});
-		});
-	}, []);
+		}
+	}, [fullReady]);
 
 	return (
 		<div
@@ -173,6 +146,7 @@ export const Game: React.FC<GameProps> = ({
 				{
 					"gg-game_transparent": transparent,
 					"gg-game_ready":
+						loaderReady &&
 						translationReady &&
 						authReady &&
 						appDataReady &&

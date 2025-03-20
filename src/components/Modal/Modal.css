@@ -1,14 +1,9 @@
 .gg-modal {
-	display: flex;
-	align-items: center;
-	justify-content: center;
 	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
-	padding: 1rem;
-	box-sizing: border-box;
 	background: #0e0c0c8f;
 
 	opacity: 0;
@@ -18,6 +13,20 @@
 		transform 0s 0.8s;
 
 	z-index: var(--gg-zindex-modal);
+}
+
+.gg-modal__content {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	box-sizing: border-box;
+	width: 100%;
+	padding: 1rem;
 }
 
 .gg-modal.gg-modal_open {

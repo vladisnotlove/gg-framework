@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import React from "react";
 import { createPortal } from "react-dom";
+import { useAppData } from "src/utils";
 import "./Modal.css";
 
 type ModalProps = React.PropsWithChildren<{
@@ -15,6 +16,7 @@ export const Modal: React.FC<ModalProps> = ({
 	children,
 	disablePortal,
 }) => {
+	const { safeTop, safeBottom } = useAppData();
 	const jsx = (
 		<div
 			className={classNames(
@@ -23,7 +25,12 @@ export const Modal: React.FC<ModalProps> = ({
 				className,
 			)}
 		>
-			{children}
+			<div
+				className="gg-modal__content"
+				style={{ top: safeTop, bottom: safeBottom }}
+			>
+				{children}
+			</div>
 		</div>
 	);
 	if (disablePortal) {

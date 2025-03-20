@@ -3,8 +3,8 @@ import { AppDataStore } from "src/stores";
 const lastRequestStartTimeByUrl = new Map<string, number>();
 
 const getBaseUrl = () => {
-	const mode = AppDataStore.$mode.getState();
-	if (mode === null) {
+	const mode = AppDataStore.$data.getState()?.mode;
+	if (!mode) {
 		throw new Error("Set 'window.appMode' before call 'request.post'");
 	} else if (mode === "development") {
 		return process.env.DEV_API_URL;

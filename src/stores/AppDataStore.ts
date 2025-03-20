@@ -1,13 +1,22 @@
 import { createEvent, createStore } from "effector";
 
-const $mode = createStore<"development" | "production" | null>(null);
-const $ready = $mode.map((state) => state !== null);
+const $data = createStore<{
+	mode: "development" | "production";
+	safeTop: string;
+	safeBottom: string;
+} | null>(null);
+const $ready = $data.map((state) => state !== null);
 
-const setMode = createEvent<"development" | "production" | null>();
-$mode.on(setMode, (_, mode) => mode);
+const setData = createEvent<{
+	mode: "development" | "production";
+	safeTop: string;
+	safeBottom: string;
+}>();
+
+$data.on(setData, (_, payload) => payload);
 
 export const AppDataStore = {
-	$mode,
+	$data,
 	$ready,
-	setMode,
+	setData,
 };

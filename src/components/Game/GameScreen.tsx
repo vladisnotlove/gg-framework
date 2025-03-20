@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import React from "react";
+import "./GameScreen.css";
 
 type GameScreenProps = React.PropsWithChildren<{
 	className?: string;
@@ -14,8 +15,9 @@ export const GameScreen: React.FC<GameScreenProps> = ({
 	return (
 		<div
 			className={classNames(
+				"gg-game-screen",
+				{ "gg-game-screen_active": active },
 				"gg-game__screen",
-				{ "gg-game_active": active },
 				className,
 			)}
 		>

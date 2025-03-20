@@ -3,8 +3,8 @@ import { useMemo } from "react";
 import { AppDataStore } from "src/stores";
 
 export const useAppData = () => {
-	const mode = useUnit(AppDataStore.$mode);
+	const data = useUnit(AppDataStore.$data);
 	const ready = useUnit(AppDataStore.$ready);
 
-	return useMemo(() => ({ mode, ready }), [mode, ready]);
+	return useMemo(() => ({ ...data, ready }), [data, ready]);
 };
