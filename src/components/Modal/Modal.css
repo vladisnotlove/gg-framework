@@ -27,6 +27,8 @@
 	box-sizing: border-box;
 	width: 100%;
 	padding: 1rem;
+	padding-top: calc(var(--gg-safe-top) + 1rem);
+	padding-bottom: calc(var(--gg-safe-bottom) + 1rem);
 }
 
 .gg-modal.gg-modal_open {

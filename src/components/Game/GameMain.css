@@ -1,7 +1,5 @@
-.gg-game-main__content {
-	position: absolute;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	width: 100%;
+.gg-game-main {
+	padding-top: var(--gg-safe-top);
+	padding-bottom: var(--gg-safe-bottom);
+	height: calc(100% - var(--gg-safe-top) - var(--gg-safe-bottom));
 }

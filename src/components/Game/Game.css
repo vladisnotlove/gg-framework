@@ -46,6 +46,9 @@ html {
 	--gg-lk-font-body: 1rem / 1.5rem "Geologica"; /* old */
 	--gg-lk-font-body2: 0.875rem / 1.25rem "Geologica"; /* old */
 
+	--gg-safe-top: 0px; /* calculated dynamically */
+	--gg-safe-bottom: 0px; /* calculated dynamically */
+
 	--gg-zindex-modal: 1000;
 	--gg-zindex-game-main-loader: 1200;
 

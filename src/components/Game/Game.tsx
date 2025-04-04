@@ -44,7 +44,7 @@ export const Game: React.FC<GameProps> = ({
 	const { ready: loaderReady } = useLoader();
 	const { ready: translationReady } = useTranslation();
 	const { ready: authReady } = useAuth();
-	const { ready: appDataReady } = useAppData();
+	const { ready: appDataReady, safeTop, safeBottom } = useAppData();
 	const { ready: adReady } = useAd();
 
 	const fullReady =
@@ -72,8 +72,8 @@ export const Game: React.FC<GameProps> = ({
 		if (window.appMode && window.safeTop && window.safeBottom) {
 			AppDataStore.setData({
 				mode: window.appMode,
-				safeBottom: window.safeTop,
-				safeTop: window.safeBottom,
+				safeBottom: window.safeBottom,
+				safeTop: window.safeTop,
 			});
 			stop();
 		}
@@ -138,6 +138,19 @@ export const Game: React.FC<GameProps> = ({
 			});
 		}
 	}, [fullReady]);
+
+	useEffect(() => {
+		if (safeTop)
+			document.documentElement.style.setProperty("--gg-safe-top", safeTop);
+	}, [safeTop]);
+
+	useEffect(() => {
+		if (safeBottom)
+			document.documentElement.style.setProperty(
+				"--gg-safe-bottom",
+				safeBottom,
+			);
+	}, [safeBottom]);
 
 	return (
 		<div

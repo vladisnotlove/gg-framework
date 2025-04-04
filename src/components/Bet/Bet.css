@@ -12,6 +12,8 @@
 		width: 100%;
 		height: 100%;
 		padding: 1rem;
+		padding-top: calc(var(--gg-safe-top) + 1rem);
+		padding-bottom: calc(var(--gg-safe-bottom) + 1rem);
 		box-sizing: border-box;
 		background: var(--gg-color-background-primary);
 	}
